@@ -1,26 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5406c4c6-c94e-4975-913e-bf03f6849146" name="Default" comment="Add Machine Learning codes">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/MachL/.idea/MachL.iml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/MachL/.idea/misc.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/MachL/.idea/modules.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/MachL/.idea/workspace.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/MachL/DistributionCharts/Binom.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/MachL/DistributionCharts/ExponDistr.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/MachL/DistributionCharts/HyperGeom.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/MachL/DistributionCharts/NegBinom.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/MachL/DistributionCharts/Norm.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/MachL/DistributionCharts/Poisson.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/MachL/DistributionCharts/UnionDistr.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/MachL/MyStatisticsLib/DiscreteDistributionChart.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/MachL/MyStatisticsLib/KDTree.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/MachL/MyStatisticsLib/KDTreeChinese.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/MachL/MyStatisticsLib/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/MachL/UmlFiles/SuperviseLearningProcess.puml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/MachL/tests/KDTreeTest.py" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-    </list>
+    <list default="true" id="5406c4c6-c94e-4975-913e-bf03f6849146" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -359,6 +340,14 @@
       <option name="presentableId" value="Default" />
       <updated>1498094866145</updated>
     </task>
+    <task id="LOCAL-00001" summary="Modify the directory structure">
+      <created>1498095533333</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1498095533333</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -397,6 +386,10 @@
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Modify the directory structure" />
+    <option name="LAST_COMMIT_MESSAGE" value="Modify the directory structure" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
