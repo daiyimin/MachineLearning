@@ -231,7 +231,7 @@ class KDTree:
             #       if ( D < R ) then super-surface intersects with the ball
             # second, because we already search on child of current node during depth first search, now it's time
             # to try the other node
-            if od_ball.capacity <= k or np.abs(target[self.split] - self.median) < od_ball.getMaxKey():
+            if od_ball.capacity < k or np.abs(target[self.split] - self.median) < od_ball.getMaxKey():
                 # search the other child that didn't tried during depth first search
                 if target[self.split] <= self.median:
                     # the same condition is used here as depth first search,
