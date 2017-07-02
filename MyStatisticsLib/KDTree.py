@@ -70,7 +70,7 @@ class KDTree:
         self.lleaf = None
         self.rleaf = None
 
-    #  data is a m X n matrix. Each row is a separate data. Each column is 1 dimension of data.
+    #  data is a m X n matrix. Each row is a separate data. Each column is 1 dimension of data. Type is numpy.array
     #  m is the number of data
     #  n is the dimension of each data
     #  return NULL
@@ -125,7 +125,7 @@ class KDTree:
         return self.rleaf != None
 
     #  search the nearest neighbor of target
-    #  target: target data to be searched
+    #  target: target data to be searched, type is numpy.array
     #  min_dist: current minimun dist point tuple, format (min dist, nearest point)
     #  return: nearest neighbor of target
     def searchNearest(self, target, min_dist=(-1,None)):
@@ -179,7 +179,7 @@ class KDTree:
         return min_dist
 
     #  search the nearest k neighbor of target
-    #  target: target data to be searched
+    #  target: target data to be searched, type is numpy.array
     #  k: number of neighbor to be searched
     #  od_ball: dict of super balls, ordered by the key(=radius)
     def search(self, target, k=1, od_ball=None):
