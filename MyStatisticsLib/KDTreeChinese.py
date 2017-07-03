@@ -83,7 +83,7 @@ class KDTree:
             self.orig_data = data
             # 在邻居数据最后增加一列，标记每个邻居在原始数据中的位置，方便使用KD树查找结果确定邻居的类型
             # 注意，最后一列是不参加KD树的构建和搜索的，build和search代码会排除它们。
-            m = data.shape[0]
+            m = len(data)
             orig_idx = np.arange(0,m)
             orig_idx.shape = (m,1)
             data = np.concatenate((data, orig_idx), axis=1)
@@ -98,7 +98,7 @@ class KDTree:
         data = data[idx]
 
         #  取得中位数
-        median_idx = int(data.shape[0]/2)
+        median_idx = int(len(data)/2)
         self.median = data[median_idx, self.split]
 
         # 经过邻居[depth%n]维度坐标中位数的超平面把邻居划分为两部分。
@@ -199,7 +199,7 @@ class KDTree:
             od_ball = MinKOrderedDict(k)
 
             # 如果K值大于原始数据点个数，那么直接返回所有的原始数据点
-            m = self.orig_data.shape[0]
+            m = len(self.orig_data)
             if k >= m:
                 # 把原始数据点添加到od_ball中
                 # 此时目标点和数据点的距离无关紧要，用range（0，m)代替
@@ -210,7 +210,7 @@ class KDTree:
         # 计算当前节点（划分超平面上）的点和目标点的距离，即超球的半径
         node_radius = distance(target, self.data)
         # 根据半径把点加入od_ball中
-        for i in range(0, self.data.shape[0]):
+        for i in range(0, len(self.data)):
             od_ball[node_radius[i]] = self.data[i]
 
         # 深度优先搜索KD树，先搜索距离目标点近的子树，递归实现。self.split是划分超平面的维度。

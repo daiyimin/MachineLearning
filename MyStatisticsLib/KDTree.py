@@ -81,7 +81,7 @@ class KDTree:
             self.orig_data = data
             # when enter the root node, we add a new column at the end of data
             # which mark the idx of data in its original order
-            m = data.shape[0]
+            m = len(data)
             orig_idx = np.arange(0,m)
             orig_idx.shape = (m,1)
             data = np.concatenate((data, orig_idx), axis=1)
@@ -97,7 +97,7 @@ class KDTree:
 
         #  get median of the split'th dimension
         #  because split'th dimension is sorted, so the index of median is in the middle
-        median_idx = int(data.shape[0]/2)   # the index of median, start from 0
+        median_idx = int(len(data)/2)   # the index of median, start from 0
         self.median = data[median_idx, self.split]
 
         #  get all the points whose split'th dimension value are equal to median
@@ -195,7 +195,7 @@ class KDTree:
         if self.depth ==0:
             od_ball = MinKOrderedDict(k)
 
-            m = self.orig_data.shape[0]  # number of points in KD tree
+            m = len(self.orig_data)  # number of points in KD tree
             if k >= m:
                 # add all KD tree points into od_ball
                 # radius doesn't has meaning in this case, set them to range(1,m)
@@ -208,7 +208,7 @@ class KDTree:
         # get distance of points on the super-surface of current node
         # the distance is radius of super balls
         node_radius = distance(target, self.data)
-        for i in range(0, self.data.shape[0]):
+        for i in range(0, len(self.data)):
             od_ball[node_radius[i]] = self.data[i]
 
         #  depth first search in KD tree

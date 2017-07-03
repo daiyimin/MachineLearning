@@ -14,7 +14,18 @@ eigens["house"] = np.array([0,0,0,1,0,0,0,1,1,1,1,1,0,0,0])
 # for loan, 1 = normal, 2 = good, 3 = very good
 eigens["loan"] = np.array([1,2,2,1,1,1,2,2,3,3,3,2,2,3,1])
 
+data_eigens = dict()
+data_eigens["age"] = 3
+data_eigens["employment"] = 0
+data_eigens["house"] = 1
+data_eigens["loan"] = 3
 
-tree = dt.DecisionTree()
+dt.DecisionTree.alpha = 1
+dt.DecisionTree.info_gain_ratio_threshold = 0.1
+
+tree = dt.DecisionTree(root=True)
 tree.build(data_set, eigens)
-i = 0
+tree.post_prune()
+
+decision = tree.decide(data_eigens)
+print(decision)
