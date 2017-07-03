@@ -1,13 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5406c4c6-c94e-4975-913e-bf03f6849146" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyStatisticsLib/DecisionTree.py" afterPath="$PROJECT_DIR$/MyStatisticsLib/DecisionTree.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyStatisticsLib/DecisionTreeUtil.py" afterPath="$PROJECT_DIR$/MyStatisticsLib/DecisionTreeUtil.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyStatisticsLib/KDTree.py" afterPath="$PROJECT_DIR$/MyStatisticsLib/KDTree.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyStatisticsLib/KDTreeChinese.py" afterPath="$PROJECT_DIR$/MyStatisticsLib/KDTreeChinese.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/DecisionTreeTest.py" afterPath="$PROJECT_DIR$/tests/DecisionTreeTest.py" />
-    </list>
+    <list default="true" id="5406c4c6-c94e-4975-913e-bf03f6849146" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -47,7 +41,7 @@
       <file leaf-file-name="DecisionTree.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/MyStatisticsLib/DecisionTree.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-299">
+            <state relative-caret-position="391">
               <caret line="32" column="73" lean-forward="false" selection-start-line="32" selection-start-column="67" selection-end-line="32" selection-end-column="73" />
               <folding />
             </state>
@@ -138,6 +132,16 @@
       <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MachineLearning" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MachineLearning" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
           <PATH>
             <PATH_ELEMENT>
               <option name="myItemId" value="MachineLearning" />
@@ -753,9 +757,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/MyStatisticsLib/DecisionTree.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-299">
+        <state relative-caret-position="391">
           <caret line="32" column="73" lean-forward="false" selection-start-line="32" selection-start-column="67" selection-end-line="32" selection-end-column="73" />
           <folding />
         </state>
