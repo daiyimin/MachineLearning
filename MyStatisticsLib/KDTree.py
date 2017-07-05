@@ -1,14 +1,17 @@
 import numpy as np
 from collections import OrderedDict
 
-# MinKOrderedDict is a utility class to save the nearest K neighbors
-# User can add newly found neighbor into MinKOrderedDict freely. When the number of neighbor is greater than K,
-# it will pop the farest neighbor first. The number of neighbor is always equal or less than K.
-#    key of the dict is distance between a neighbor and target. Each key represent a found super ball. Radius of ball is
-#        equals to value of key
-#    value of the dict is a list of neighbors whose is exactly distance "key" away from target. These neighbors are on
-#        the same super ball (belong to same key).
+
 class MinKOrderedDict(OrderedDict):
+    """
+    MinKOrderedDict is a utility class to save the nearest K neighbors
+    User can add newly found neighbor into MinKOrderedDict freely. When the number of neighbor is greater than K,
+    it will pop the farest neighbor first. The number of neighbor is always equal or less than K.
+        key of the dict is distance between a neighbor and target. Each key represent a found super ball. Radius of ball is
+            equals to value of key
+        value of the dict is a list of neighbors whose is exactly distance "key" away from target. These neighbors are on
+            the same super ball (belong to same key).
+    """
     # k: the number of nearest neighbor to be saved in the dictionary
     # capacity: the current capacity of dictionary, default value is 0
     def __init__(self, k):

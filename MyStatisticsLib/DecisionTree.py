@@ -1,4 +1,5 @@
 import MyStatisticsLib.DecisionTreeUtil as dtu
+import MyStatisticsLib.TreePlot as plt
 
 class DecisionTree:
     info_gain_ratio_threshold = 0.1
@@ -9,8 +10,13 @@ class DecisionTree:
         self.children = dict()
         self.root = root
 
-    # build tree with data set and eigens
     def build(self, data_set, eigens):
+        """
+        build tree with data set and eigens
+        :param data_set: data set
+        :param eigens: dictionary of eigens. key is eigen name, value is eigen values
+        :return:
+        """
         # calculate entropy and loss of this node
         self.entropy = dtu.empirical_entropy(data_set)
         self.loss = self.entropy * len(data_set)
@@ -48,40 +54,46 @@ class DecisionTree:
             child.build(data_split, eigens_split)
             self.children[best_eigen_distinct_value] = child
 
-    # calculate loss of all leaves of node
-    # node, the root of sub-tree
     def loss_of_leaf(node):
+        """
+        calculate loss of all leaves of node
+        :param node:
+        :return: the root of sub-tree
+        """
         if len(node.children) != 0:
             loss = 0
-            for child in node.children:
-                child_node = node.children[child]
+            for child in node.children.values():
                 # sum up the loss of each leaf
                 # Add regulation item (alpha) to each leaf loss.Total regulation item will be multiplied by leaf number
-                loss += DecisionTree.loss_of_leaf(child_node) + DecisionTree.alpha
+                loss += DecisionTree.loss_of_leaf(child) + DecisionTree.alpha
             return loss;
         else:
             # if i am a leaf node, return my loss.
             return node.loss
 
-    # prune tree nodes
     def post_prune(self):
+        """
+        prune tree nodes
+        :return:
+        """
         if len(self.children) != 0:
-            for child in self.children:
-                child_node = self.children[child]
-                child_node.post_prune()
+            for child in self.children.values():
+                child.post_prune()
 
             # For root node, no need to prune it. Because decision tree needs at least two levels.
             if self.root:
                 return
 
             # if loss of leaf nodes is greater or equal to loss of parent, prune this sub-tree
-            if DecisionTree.loss_of_leaf(self) >= self.loss + DecisionTree.alpha:
+            if self.loss_of_leaf() >= self.loss + DecisionTree.alpha:
                 self.children.clear()
 
-    # make decision based on input data
-    # data, dictionary of a sample of all eigens
-    # return: decision
     def decide(self, data):
+        """
+        make decision based on input data
+        :param data: dictionary of a sample of all eigens
+        :return:
+        """
         if len(self.children) == 0:
             # if i am a leaf node, return my decision
             return self.category
@@ -92,3 +104,24 @@ class DecisionTree:
                 return chosen_child.decide(data)
             except KeyError as e:
                 print("Key doesn't exist: " + e.__str__())
+
+    def traverse(self):
+        """
+        :return:  Decision Tree in dictionary format
+        """
+        if len(self.children) != 0:
+            tree = dict()
+            sub_tree = dict()
+            for eigen_value, child in self.children.items():
+                sub_tree[eigen_value] = child.traverse()
+            tree[self.best_eigen_name] = sub_tree
+            return tree
+        else:
+            return self.category
+
+    def draw(self):
+        """
+        draw Decision Tree
+        """
+        tree_in_dict = self.traverse()
+        plt.createPlot(tree_in_dict)

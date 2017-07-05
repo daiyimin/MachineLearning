@@ -29,3 +29,5 @@ tree.post_prune()
 
 decision = tree.decide(data_eigens)
 print(decision)
+
+tree_in_dict = tree.draw()
