@@ -17,16 +17,18 @@ class CartDecisionTree:
     def build(self, data_set, eigens):
         self.prediction = np.average(data_set)
 
-        # if data set is too small, return this node as leaf node
+        # 如果数据集太小,终止分片.把当前节点作为叶结点返回.
         if len(data_set) < CartDecisionTree.data_set_size_threshold:
             return
 
-        self.split_eigen, self.split_value, min_sqr_sum = cdtu.choose_best_split(data_set, eigens)
-        # if minimum squared sum is less than threshold, split is good enough. Return this node as leaf node
-        if min_sqr_sum < CartDecisionTree.deviation_sum_threshold:
+        self.split_eigen, self.split_value, min_dev_sum = cdtu.choose_best_split(data_set, eigens)
+        # 如果最小的差方和小于预设阈值,说明数据集分片已经足够好.把当前节点作为叶结点返回.
+        if min_dev_sum < CartDecisionTree.deviation_sum_threshold:
             return
 
+        # 根据选出的分片特征(split_eigen)和特征值(split_value),把数据集和特征字典分片
         splits = cdtu.split_all(data_set, eigens, self.split_eigen, self.split_value)
+        # 给每个分片创建相应的子树
         for data_set_split, eigens_split in splits:
             child = CartDecisionTree()
             child.build(data_set_split, eigens_split)
@@ -50,7 +52,7 @@ class CartDecisionTree:
 
     def draw(self):
         """
-        draw Decision Tree
+        draw CART Tree
         """
         tree_in_dict = self.traverse()
         plt.createPlot(tree_in_dict)

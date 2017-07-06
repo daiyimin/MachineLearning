@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5406c4c6-c94e-4975-913e-bf03f6849146" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyStatisticsLib/KDTree.py" afterPath="$PROJECT_DIR$/MyStatisticsLib/KDTree.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyStatisticsLib/KDTreeChinese.py" afterPath="$PROJECT_DIR$/MyStatisticsLib/KDTreeChinese.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/KDTreeTest.py" afterPath="$PROJECT_DIR$/tests/KDTreeTest.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyStatisticsLib/CartDecissonTree.py" afterPath="$PROJECT_DIR$/MyStatisticsLib/CartDecissonTree.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -21,7 +19,42 @@
     <favorites_list name="MachineLearning" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="CartDecissonTree.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/MyStatisticsLib/CartDecissonTree.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="474">
+              <caret line="54" column="17" lean-forward="false" selection-start-line="54" selection-start-column="17" selection-end-line="54" selection-end-column="17" />
+              <folding>
+                <element signature="e#0#51#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CartDecisionTreeUtil.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/MyStatisticsLib/CartDecisionTreeUtil.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="115">
+              <caret line="34" column="15" lean-forward="false" selection-start-line="34" selection-start-column="4" selection-end-line="34" selection-end-column="15" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CartDecisionTreeTest.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tests/CartDecisionTreeTest.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="14" selection-end-column="11" />
+              <folding>
+                <element signature="e#0#18#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -39,6 +72,8 @@
       <find>createPlot</find>
       <find>lleaf</find>
       <find>surface</find>
+      <find>sqr</find>
+      <find>dev</find>
     </findStrings>
     <replaceStrings>
       <replace>plane</replace>
@@ -57,14 +92,14 @@
         <option value="$PROJECT_DIR$/MyStatisticsLib/CartDecisionTreePlot.py" />
         <option value="$PROJECT_DIR$/tests/DecisionTreeTest.py" />
         <option value="$PROJECT_DIR$/MyStatisticsLib/DecisionTree.py" />
-        <option value="$PROJECT_DIR$/MyStatisticsLib/CartDecissonTree.py" />
-        <option value="$PROJECT_DIR$/tests/CartDecisionTreeTest.py" />
         <option value="$PROJECT_DIR$/MyStatisticsLib/TreePlot.py" />
         <option value="$PROJECT_DIR$/MyStatisticsLib/CartDecisionTreeUtil.py" />
         <option value="$PROJECT_DIR$/MyStatisticsLib/DecisionTreeUtil.py" />
         <option value="$PROJECT_DIR$/tests/KDTreeTest.py" />
         <option value="$PROJECT_DIR$/MyStatisticsLib/KDTreeChinese.py" />
         <option value="$PROJECT_DIR$/MyStatisticsLib/KDTree.py" />
+        <option value="$PROJECT_DIR$/MyStatisticsLib/CartDecissonTree.py" />
+        <option value="$PROJECT_DIR$/tests/CartDecisionTreeTest.py" />
       </list>
     </option>
   </component>
@@ -188,7 +223,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.KDTreeTest">
+  <component name="RunManager" selected="Python.CartDecisionTreeTest">
     <configuration default="false" name="CartDecisionTreeTest" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -384,9 +419,9 @@
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python.KDTreeTest" />
-        <item index="1" class="java.lang.String" itemvalue="Python.DecisionTreeTest" />
-        <item index="2" class="java.lang.String" itemvalue="Python.CartDecisionTreeTest" />
+        <item index="0" class="java.lang.String" itemvalue="Python.CartDecisionTreeTest" />
+        <item index="1" class="java.lang.String" itemvalue="Python.KDTreeTest" />
+        <item index="2" class="java.lang.String" itemvalue="Python.DecisionTreeTest" />
         <item index="3" class="java.lang.String" itemvalue="Python.CartDecissonTree" />
         <item index="4" class="java.lang.String" itemvalue="Python.TreePlot" />
       </list>
@@ -796,24 +831,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tests/CartDecisionTreeTest.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="276">
-          <caret line="12" column="28" lean-forward="true" selection-start-line="12" selection-start-column="28" selection-end-line="12" selection-end-column="28" />
-          <folding>
-            <element signature="e#0#18#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MyStatisticsLib/CartDecisionTreeUtil.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1155">
-          <caret line="3" column="0" lean-forward="false" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/tests/DecisionTreeTest.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="392">
@@ -836,14 +853,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="386">
           <caret line="135" column="0" lean-forward="false" selection-start-line="135" selection-start-column="0" selection-end-line="135" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MyStatisticsLib/CartDecissonTree.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="23">
-          <caret line="1" column="32" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -874,6 +883,34 @@
           <caret line="221" column="20" lean-forward="false" selection-start-line="221" selection-start-column="20" selection-end-line="221" selection-end-column="20" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/CartDecisionTreeTest.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="14" selection-end-column="11" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MyStatisticsLib/CartDecisionTreeUtil.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="115">
+          <caret line="34" column="15" lean-forward="false" selection-start-line="34" selection-start-column="4" selection-end-line="34" selection-end-column="15" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MyStatisticsLib/CartDecissonTree.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="474">
+          <caret line="54" column="17" lean-forward="false" selection-start-line="54" selection-start-column="17" selection-end-line="54" selection-end-column="17" />
+          <folding>
+            <element signature="e#0#51#0" expanded="true" />
           </folding>
         </state>
       </provider>
