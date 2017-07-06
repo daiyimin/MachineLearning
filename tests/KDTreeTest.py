@@ -7,9 +7,11 @@ data = np.array([[9,6,3], [4,7,4], [8,1,5], [7,2,2], [7,4,3], [3.2,5,1]])
 
 tree = KDTreeChinese.KDTree()
 tree.build(data)
+print(tree.traverse())
 
 target = np.array([3,1,4])
-neibour = tree.search(target, k=5)
+neibour = tree.searchNearest(target)
+#neibour = tree.search(target, k=5)
 
 print(neibour)
 
@@ -22,3 +24,5 @@ def distance(target, node_data):
     return distance
 
 print(distance(target, data))
+
+tree.draw()

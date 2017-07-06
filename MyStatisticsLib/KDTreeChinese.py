@@ -1,5 +1,6 @@
 import numpy as np
 from collections import OrderedDict
+import MyStatisticsLib.TreePlot as plt
 
 # MinKOrderedDict是一个工具类，用来保存最近的K个邻居
 # 在遍历KD树过程中，用户可以向MinKOrderedDict添加新发现到的邻居，不用关心邻居和目标点的距离。
@@ -68,8 +69,7 @@ class KDTree:
         self.split = -1
         self.median = -1
         self.data = None
-        self.lleaf = None
-        self.rleaf = None
+        self.children = dict()
 
     #  构建KD树
     #  data是一个m乘n的矩阵。矩阵的每一行是一个邻居点，行中的每一列是邻居的一个坐标/维度
@@ -104,26 +104,20 @@ class KDTree:
         # 经过邻居[depth%n]维度坐标中位数的超平面把邻居划分为两部分。
         # 这个超平面记为当前节点的超平面Sc，每个非叶节点都有自己的超平面。
         # 把超平面上的点保存在当前节点内
-        midx = np.where(data[:, self.split] == self.median)
-        if np.size(midx) > 0:
+        median_idx = np.where(data[:, self.split] == self.median)
+        if np.size(median_idx) > 0:
             #  save those points to this tree node
-            self.data = data[midx]
-        # 把划分超平面右侧的点保存在右子树中，递归实现
-        midx = np.where(data[:, self.split] > self.median)
-        if np.size(midx) > 0:
-            self.rleaf = KDTree(self.depth + 1, self)
-            self.rleaf.build(data[midx])
+            self.data = data[median_idx]
+
+
         # 把划分超平面左侧的点保存在左子树中，递归实现
-        midx = np.where(data[:, self.split] < self.median)
-        if np.size(midx) > 0:
-            self.lleaf = KDTree(self.depth + 1, self)
-            self.lleaf.build(data[midx])
-
-    def has_lleaf(self):
-        return self.lleaf != None
-
-    def has_rleaf(self):
-        return self.rleaf != None
+        l_median_idx = np.where(data[:, self.split] < self.median), "left"
+        # 把划分超平面右侧的点保存在右子树中，递归实现
+        r_median_idx = np.where(data[:, self.split] > self.median), "right"
+        for median_idx, type in (l_median_idx, r_median_idx):
+            if np.size(median_idx) > 0:
+                self.children[type] = KDTree(self.depth + 1, self)
+                self.children[type].build(data[median_idx])
 
     #  search the nearest neighbor of target
     #  target: target data to be searched
@@ -149,17 +143,13 @@ class KDTree:
 
         #  depth first search in KD tree
         #  self.split is the dimension by which child tree nodes are split
-        if target[self.split] <= self.median:
-            # if target is less than median on the split dimension, search left child
-            if self.has_lleaf():
-                min_dist = self.lleaf.searchNearest(target, min_dist)
-        else:
-            # if target is bigger than median on the split dimension, search right child
-            if self.has_rleaf():
-                min_dist = self.rleaf.searchNearest(target, min_dist)
+        #  if target is less than median on the split dimension, search left child. Otherwise search right child.
+        type = "left" if target[self.split] <= self.median else "right"
+        if type in self.children.keys():
+            min_dist = self.children[type].searchNearest(target, min_dist)
 
         # for a non-leaf node, we need to judge if their children contains a nearest neighbor
-        if self.has_lleaf() or self.has_rleaf():
+        if len(self.children) > 0:
             # first, only when the super-ball intersects with split super-surface of current node
             # then the node's children will probably contains nearest neighbor
             #       D = distance between center of ball and super-surface = "np.abs(target[self.split] - self.median)"
@@ -169,14 +159,9 @@ class KDTree:
             # to try the other node
             if np.abs(target[self.split] - self.median) < min_dist[0]:
                 # search the other child that didn't tried during depth first search
-                if target[self.split] <= self.median:
-                    # the same condition is used here as depth first search,
-                    # but this time search the right leaf
-                    if self.has_rleaf():
-                        min_dist = self.rleaf.searchNearest(target, min_dist)
-                else:
-                    if self.has_lleaf():
-                        min_dist = self.lleaf.searchNearest(target, min_dist)
+                type = "right" if target[self.split] <= self.median else "left"
+                if type in self.children.keys():
+                    min_dist = self.children[type].searchNearest(target, min_dist)
         return min_dist
 
     #  搜索目标点最近的K个邻居
@@ -214,15 +199,12 @@ class KDTree:
             od_ball[node_radius[i]] = self.data[i]
 
         # 深度优先搜索KD树，先搜索距离目标点近的子树，递归实现。self.split是划分超平面的维度。
-        if target[self.split] <= self.median:
-            if self.has_lleaf():
-                od_ball = self.lleaf.search(target, k, od_ball)
-        else:
-            if self.has_rleaf():
-                od_ball = self.rleaf.search(target, k, od_ball)
+        type = "left" if target[self.split] <= self.median else "right"
+        if type in self.children.keys():
+            self.children[type].search(target, k, od_ball)
 
         # 递归搜索返回后，对于非叶节点，判断距离目标点远的子树是否含有比搜索结果更近的邻居
-        if self.has_lleaf() or self.has_rleaf():
+        if len(self.children) > 0:
             # 1）如果，搜索结果中的邻居个数小于k，则需要寻找比结果中超球更大的超球。
             # 2）如果，搜索结果中的邻居个数等于k，则判断结果中最大的超球和当前节点的超平面Sc是否相交。如果相交，说明
             # 距离目标点远的子树内可能有更近的邻居。
@@ -231,10 +213,35 @@ class KDTree:
             #    结果中最大超球的半径 = od_ball.getMaxKey()
             # 1）或 2）成立时，搜索距离目标点远的子树。
             if od_ball.capacity < k or np.abs(target[self.split] - self.median) < od_ball.getMaxKey():
-                if target[self.split] <= self.median:
-                    if self.has_rleaf():
-                        od_ball = self.rleaf.search(target, k, od_ball)
-                else:
-                    if self.has_lleaf():
-                        od_ball = self.lleaf.search(target, k, od_ball)
+                # search the other child that didn't tried during depth first search
+                type = "right" if target[self.split] <= self.median else "left"
+                if type in self.children.keys():
+                    self.children[type].search(target, k, od_ball)
         return od_ball
+
+    def traverse(self):
+        """
+        :return:  KD Tree in dictionary format
+        """
+        if len(self.children) > 0:
+            tree = dict()
+            sub_tree = dict()
+            my_median = str(self.median)
+
+            for child in self.children:
+                op = "<" if child == "left" else ">"
+                sub_tree[op + my_median] = self.children[child].traverse()
+
+            tree_tag = "dim=" + str(self.split) + ", data num =" + str(len(self.data))
+            tree[tree_tag] = sub_tree
+            return tree
+        else:
+            leaf_tag = "data num ="  + str(len(self.data))
+            return leaf_tag
+
+    def draw(self):
+        """
+        draw KD Tree
+        """
+        tree_in_dict = self.traverse()
+        plt.createPlot(tree_in_dict)
