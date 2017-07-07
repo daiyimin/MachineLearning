@@ -1,12 +1,33 @@
 import numpy as np
 
 
+def deviation_sum(data_set):
+    return np.var(data_set) * len(data_set)
+
+
+def cond_deviation_sum(splits):
+    """
+    calculate deviation sum of splits
+    deviation sum = variance * (sample number)
+    :param splits: tuple of (s1, s2),
+    s1 is split whose data is less than split value.
+    s2 is split whose data is greater than split value
+    :return:
+    """
+    s1, s2 = splits
+    s1_dev_sum = deviation_sum(s1)
+    # If s2 is empty, it's impossible to split data set.
+    # So, don't let it happen by set s2_dev_sum = float('inf').
+    s2_dev_sum = deviation_sum(s2) if len(s2) != 0 else float('inf')
+    return s1_dev_sum + s2_dev_sum
+
+
 def best_split_of_eigen(data_set, eigens, eigen):
     """
-    For the specified eigen, find the best eigen value to split data set which generate minimum deviation sum
-    :param data_set:
+    尝试用指定的特征名（eigen）的每一个特征值把数据集分片，找到对应最小差方和的特征值
+    :param data_set: 数据集，类型是单轴的numpy.array
     :param eigens: dictionary of all eigens. Its index is eigen name, and values are eigen values
-    :param eigen: specified eigen name
+    :param eigen: 特征名
     :return: specified eigen name, best eigen value, minimum deviation sum
     """
     def split_data_set(distinct_value):
@@ -15,22 +36,12 @@ def best_split_of_eigen(data_set, eigens, eigen):
         s2 = data_set[eigen_values > distinct_value]
         return s1, s2
 
-    # calculate deviation sum of splits
-    # deviation sum = variance * (sample number)
-    def deviation_sum(splits):
-        s1, s2 = splits
-        s1_dev_sum = np.var(s1) * len(s1)
-        # If s2 is empty, it's impossible to split data set.
-        # So, don't let it happen by set s2_dev_sum = float('inf').
-        s2_dev_sum = np.var(s2) * len(s2) if len(s2) != 0 else float('inf')
-        return s1_dev_sum + s2_dev_sum
-
     eigen_values = eigens[eigen]
     distinct_value = list(set(eigen_values))
     # get splits per each distinct eigen value
     all_splits = map(split_data_set, distinct_value)
     # calculate deviation sum of splits per each distinct eigen value
-    all_dev_sum = list(map(deviation_sum, all_splits))
+    all_dev_sum = list(map(cond_deviation_sum, all_splits))
     # get minimum deviation sum
     min_dev_sum = min(all_dev_sum)
     min_dev_sum_index = all_dev_sum.index(min_dev_sum)

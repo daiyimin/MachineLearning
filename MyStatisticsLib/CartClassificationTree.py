@@ -1,11 +1,11 @@
-import MyStatisticsLib.CartDecisionTreeUtil as cdtu
+import MyStatisticsLib.CartClassificationTreeUtil as cctu
 import MyStatisticsLib.TreePlot as plt
 import numpy as np
 
 
-class CartDecisionTree:
+class CartClassificationTree:
     data_set_size_threshold = 5
-    deviation_sum_threshold = 1
+    cond_gini_threshold = 0.1
 
     def __init__(self, root=False):
         self.root = root
@@ -13,24 +13,25 @@ class CartDecisionTree:
         self.split_eigen = None
         self.split_value = None
         self.prediction = None
+        self.gini = None
+        self.data_set_size = None
 
     def build(self, data_set, eigens):
-        self.prediction = np.average(data_set)
+        self.prediction = cctu.mode(data_set)
+        self.gini = cctu.gini(data_set)
+        self.data_set_size = len(data_set)
 
-        # 如果数据集太小,终止分片.把当前节点作为叶结点返回.
-        if len(data_set) < CartDecisionTree.data_set_size_threshold:
+        # if data set is too small, return this node as leaf node
+        if len(data_set) < CartClassificationTree.data_set_size_threshold:
+            return
+        # if gini index of data set is less than threshold, split is good enough. Return this node as leaf node
+        if self.gini < CartClassificationTree.cond_gini_threshold:
             return
 
-        self.split_eigen, self.split_value, min_dev_sum = cdtu.choose_best_split(data_set, eigens)
-        # 如果最小的差方和小于预设阈值,说明数据集分片已经足够好.把当前节点作为叶结点返回.
-        if min_dev_sum < CartDecisionTree.deviation_sum_threshold:
-            return
-
-        # 根据选出的分片特征(split_eigen)和特征值(split_value),把数据集和特征字典分片
-        splits = cdtu.split_all(data_set, eigens, self.split_eigen, self.split_value)
-        # 给每个分片创建相应的子树
+        self.split_eigen, self.split_value, min_cond_gini = cctu.choose_best_split(data_set, eigens)
+        splits = cctu.split_all(data_set, eigens, self.split_eigen, self.split_value)
         for data_set_split, eigens_split in splits:
-            child = CartDecisionTree()
+            child = CartClassificationTree()
             child.build(data_set_split, eigens_split)
             self.children.append(child)
 
@@ -42,7 +43,7 @@ class CartDecisionTree:
             tree = dict()
             sub_tree = dict()
             split_value = str(self.split_value)
-            condition = ["<=", ">"]
+            condition = ["==", "!="]
             for child, cond in zip(self.children, condition):
                 sub_tree[cond + split_value] = child.traverse()
             tree[self.split_eigen] = sub_tree
@@ -52,7 +53,7 @@ class CartDecisionTree:
 
     def draw(self):
         """
-        draw CART Tree
+        draw Decision Tree
         """
         tree_in_dict = self.traverse()
         plt.createPlot(tree_in_dict)

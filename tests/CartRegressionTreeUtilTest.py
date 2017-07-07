@@ -1,5 +1,5 @@
 import numpy as np
-import MyStatisticsLib.CartDecisionTreeUtil as cdtu
+import MyStatisticsLib.CartRegressionTreeUtil as cdtu
 
 data_set = np.array([4.5, 4.75, 4.91, 5.34, 5.8, 7.05, 7.9, 8.23, 8.7, 9.0])
 
