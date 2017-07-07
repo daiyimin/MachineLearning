@@ -24,11 +24,11 @@ class CartRegressionTree:
         :return:
         """
         self.prediction = np.average(data_set)
-        self.deviation_sum = crtu.deviation_sum(data_set)
         self.data_set_size = len(data_set)
+        self.deviation_sum = crtu.deviation_sum(data_set)
 
         # 如果数据集太小,终止分片.把当前节点作为叶结点返回.
-        if len(data_set) < CartRegressionTree.data_set_size_threshold:
+        if self.data_set_size < CartRegressionTree.data_set_size_threshold:
             return
         # 如果最小的差方和小于预设阈值,说明数据集分片已经足够好.把当前节点作为叶结点返回.
         if self.deviation_sum < CartRegressionTree.deviation_sum_threshold:
