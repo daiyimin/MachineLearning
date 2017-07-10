@@ -54,22 +54,22 @@ class DecisionTree:
             child.build(data_split, eigens_split)
             self.children[best_eigen_distinct_value] = child
 
-    def loss_of_leaf(node):
+    def loss_of_leaf(self):
         """
         calculate loss of all leaves of node
         :param node:
         :return: the root of sub-tree
         """
-        if len(node.children) != 0:
+        if len(self.children) != 0:
             loss = 0
-            for child in node.children.values():
+            for child in self.children.values():
                 # sum up the loss of each leaf
                 # Add regulation item (alpha) to each leaf loss.Total regulation item will be multiplied by leaf number
-                loss += DecisionTree.loss_of_leaf(child) + DecisionTree.alpha
+                loss += child.loss_of_leaf() + DecisionTree.alpha
             return loss;
         else:
             # if i am a leaf node, return my loss.
-            return node.loss
+            return self.loss
 
     def post_prune(self):
         """
